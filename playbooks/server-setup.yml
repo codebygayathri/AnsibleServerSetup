@@ -1,0 +1,79 @@
+---
+- name: Enhanced Server Setup
+  hosts: servers
+  become: true
+  vars:
+    demo_users:
+      - name: demo1
+      - name: demo2
+
+  tasks:
+
+    # -------------------------------
+    # 1️⃣ Gather facts
+    # -------------------------------
+    - name: Gather server facts
+      ansible.builtin.setup:
+
+    # -------------------------------
+    # 2️⃣ Update apt cache
+    # -------------------------------
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    # -------------------------------
+    # 3️⃣ Install common packages
+    # -------------------------------
+    - name: Install common packages
+      ansible.builtin.apt:
+        name:
+          - git
+          - curl
+          - vim
+          - nginx
+          - docker.io
+        state: present
+
+    # -------------------------------
+    # 4️⃣ Ensure services are running
+    # -------------------------------
+    - name: Ensure nginx is running
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Ensure docker is running
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
+
+    # -------------------------------
+    # 5️⃣ Create demo directory
+    # -------------------------------
+    - name: Create a demo directory
+      ansible.builtin.file:
+        path: /home/ubuntu/demo
+        state: directory
+        mode: '0755'
+
+    # -------------------------------
+    # 6️⃣ Timezone configuration
+    # -------------------------------
+    - name: Set timezone to UTC
+      ansible.builtin.command: timedatectl set-timezone UTC
+
+    # -------------------------------
+    # 7️⃣ User management
+    # -------------------------------
+    - name: Create demo users with sudo
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        state: present
+        groups: sudo
+        append: yes
+        create_home: yes
+      loop: "{{ demo_users }}"
+

@@ -1,0 +1,37 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install common packages
+  apt:
+    name:
+      - git
+      - nginx
+      - docker.io
+    state: present
+
+- name: Ensure nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Create a sudo user
+  user:
+    name: devopsuser
+    comment: "DevOps User"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    password: "{{ 'DevOps123!' | password_hash('sha512') }}"
+
+- name: Set timezone to Asia/Kolkata
+  timezone:
+    name: Asia/Kolkata
+
+- name: Copy sample config file
+  copy:
+    src: sample.conf
+    dest: /etc/sample.conf
+
