@@ -8,11 +8,9 @@ Using Ansible playbooks, common server administration tasks such as package inst
 
 ## Features
 
-- Configure an Ansible Control Node
-- Manage multiple AWS EC2 instances
+- Manage multiple AWS EC2 instances using one control node
 - Passwordless SSH authentication
 - Inventory-based server management
-- Execute Ansible ad-hoc commands
 - Install common software packages automatically
 - Configure and manage Nginx service
 - Configure and manage Docker service
@@ -33,7 +31,9 @@ Using Ansible playbooks, common server administration tasks such as package inst
 
 ## Architecture
 
+## Architecture
 
+```text
                  AWS Cloud
 
          +-----------------------+
@@ -49,8 +49,7 @@ Using Ansible playbooks, common server administration tasks such as package inst
 | Managed-1  | | Managed-2  | | Managed-3  |
 | Ubuntu EC2 | | Ubuntu EC2 | | Ubuntu EC2 |
 +------------+ +------------+ +------------+
-
-
+```
 ## Project Workflow
 
 1. Launch one AWS EC2 instance as the Ansible Control Node.
@@ -83,44 +82,31 @@ The playbook performs the following operations:
 ## Project Structure
 
 
-  ansible-server
-  ├── ansible.cfg
-  ├── inventory
-  │   └── hosts.ini  (was hidden as it contains instance's public IP)
-  |-- key.pem
-  ├── playbooks
-  │   ├── setup.yml
-  │   └── enhanced-server-setup.yml
-  ├── files
-  │   └── sample.conf
-  └── README.md
-
-
----
+```text
+ansible-server-setup
+├── README.md
+├── ansible.cfg
+├── inventory
+│   └── hosts.ini
+├── playbooks
+│   └── server-setup.yml
+├── roles
+│   └── common
+│       ├── files
+│       │   └── sample.conf
+│       └── tasks
+│           └── main.yml
+```
 
 ## Screenshots
 
 ### AWS EC2 Instances
 
-### SSH Connectivity
-
-### Inventory Configuration
+<img width="1065" height="238" alt="important3" src="https://github.com/user-attachments/assets/1e4e7c24-0360-4ca8-bdbf-a1c3f84b8bcd" />
 
 ### Successful Ansible Ping
 
-### Playbook Execution
-
-### Nginx Installed on Managed Nodes
-
-### Docker Installed on Managed Nodes
-
-### Created Users
-
-### Directory Structure
-
-### Git Repository
-
----
+<img width="932" height="606" alt="important1" src="https://github.com/user-attachments/assets/bd8664e9-a4f5-487d-aa18-c644265357d0" />
 
 ## Design Principle
 
@@ -128,18 +114,15 @@ The playbook performs the following operations:
 
 The project follows the Infrastructure as Code (IaC) approach by defining server configuration as Ansible playbooks instead of performing manual configuration. This ensures consistent, repeatable, and automated infrastructure provisioning across multiple servers.
 
----
 
 ## Future Enhancements
 
-- Implement Ansible Roles for modular playbooks.
+
 - Use Ansible Galaxy roles.
 - Automate application deployment.
 - Configure load balancers.
-- Integrate Ansible with Jenkins CI/CD.
 - Manage larger server clusters.
 
----
 
 ## Deployment Environment
 
