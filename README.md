@@ -87,12 +87,7 @@ ansible-server-setup
 │   └── hosts.ini
 ├── playbooks
 │   └── server-setup.yml
-├── roles
-│   └── common
-│       ├── files
-│       │   └── sample.conf
-│       └── tasks
-│           └── main.yml
+
 ```
 
 ## Screenshots
