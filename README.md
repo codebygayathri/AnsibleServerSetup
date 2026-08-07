@@ -4,7 +4,7 @@
 
 This project demonstrates infrastructure automation using Ansible on AWS EC2. A dedicated Ansible Control Node was configured to manage three Ubuntu EC2 managed nodes through SSH key-based authentication.
 
-Using Ansible playbooks, common server administration tasks such as package installation, service management, user creation, directory creation, timezone configuration, and file deployment were automated across multiple servers.
+Using Ansible playbooks, common server administration tasks such as package installation, service management, user creation, directory creation, and timezone configuration were automated across multiple servers.
 
 ## Features
 
@@ -17,7 +17,6 @@ Using Ansible playbooks, common server administration tasks such as package inst
 - Create Linux users with sudo privileges
 - Create directories automatically
 - Configure server timezone
-- Copy configuration files to managed nodes
 - Automate repetitive server administration tasks
 
 
@@ -28,8 +27,6 @@ Using Ansible playbooks, common server administration tasks such as package inst
 - AWS EC2
 - SSH
 
-
-## Architecture
 
 ## Architecture
 
