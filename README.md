@@ -27,7 +27,6 @@ Using Ansible playbooks, common server administration tasks such as package inst
 - AWS EC2
 - SSH
 
-
 ## Architecture
 
 ```text
@@ -47,6 +46,7 @@ Using Ansible playbooks, common server administration tasks such as package inst
 | Ubuntu EC2 | | Ubuntu EC2 | | Ubuntu EC2 |
 +------------+ +------------+ +------------+
 ```
+
 ## Project Workflow
 
 1. Launch one AWS EC2 instance as the Ansible Control Node.
@@ -74,7 +74,6 @@ The playbook performs the following operations:
 - Create Linux users with sudo privileges
 - Create application directories
 - Configure server timezone
-- Copy configuration files to managed nodes
 
 ## Project Structure
 
